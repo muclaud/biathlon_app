@@ -29,9 +29,9 @@ module.exports = gql`
     Equipment: [PersonalInfo]
     comments: [Comment]!
     likes: [Like]!
-    likeCount: Int!
-    commentCount: Int!
-    sportsmenCount: Int!
+    # likeCount: Int
+    # commentCount: Int
+    sportsmenCount: Int
   }
   type Sportswoman {
     id: ID!
@@ -53,8 +53,8 @@ module.exports = gql`
     Equipment: [PersonalInfo]
     comments: [Comment]!
     likes: [Like]!
-    likeCount: Int!
-    commentCount: Int!
+    # likeCount: Int
+    # commentCount: Int
   }
   type PersonalInfo {
     Description: String
@@ -73,26 +73,26 @@ module.exports = gql`
     Results: [Result]!
     comments: [Comment]!
     likes: [Like]!
-    likeCount: Int!
-    commentCount: Int!
-    ResultCounter: Int!
+    # likeCount: Int
+    # commentCount: Int
+    ResultCounter: Int
   }
   type Result {
-    StartOrder: Int!
-    ResultOrder: Int!
-    IBUId: String!
-    Name: String!
-    ShortName: String!
-    Nat: String!
-    Bib: String!
-    Rank: String!
+    StartOrder: Int
+    ResultOrder: Int
+    IBUId: String
+    Name: String
+    ShortName: String
+    Nat: String
+    Bib: String
+    Rank: String
     Shootings: String
     ShootingTotal: String
     RunTime: String
-    TotalTime: String!
-    StartInfo: String!
-    Behind: String!
-    Result: String!
+    TotalTime: String
+    StartInfo: String
+    Behind: String
+    Result: String
   }
   type Post {
     id: ID!
@@ -101,8 +101,8 @@ module.exports = gql`
     username: String!
     comments: [Comment]!
     likes: [Like]!
-    likeCount: Int!
-    commentCount: Int!
+    # likeCount: Int!
+    # commentCount: Int!
   }
   type Comment {
     id: ID!
@@ -152,5 +152,8 @@ module.exports = gql`
     createCommentCompetition(RaceId: ID!, body: String!): Competition!
     createCommentSportsman(IBUId: ID!, body: String!): Sportsman!
     createCommentSportswoman(IBUId: ID!, body: String!): Sportswoman!
+  }
+  type Subscription {
+    newPost: Post!
   }
 `;
