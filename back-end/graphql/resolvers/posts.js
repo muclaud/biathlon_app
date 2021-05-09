@@ -2,6 +2,10 @@ const { AuthenticationError, UserInputError } = require('apollo-server-errors');
 const Post = require('../../models/Post');
 const checkAuth = require('../../util/check-auth');
 
+const errorCatch = function (err, p) {
+  if (err) return console.error(err);
+};
+
 module.exports = {
   Query: {
     async getPosts() {
@@ -29,6 +33,10 @@ module.exports = {
     async createPost(_, { body }, context) {
       const user = checkAuth(context);
 
+      if (body.trim() === '') {
+        throw new Error('Post body must not be empty');
+      }
+
       const newPost = new Post({
         body,
         user: user.id,
@@ -45,9 +53,9 @@ module.exports = {
     async deletePost(_, { postId }, context) {
       const user = checkAuth(context);
       try {
-        const post = await Post.findById(postId);
+        const post = await Post.findById(postId, errorCatch);
         if (user.username === post.username) {
-          await post.delete();
+          await post.delete(errorCatch);
           return 'Post deleted successfully';
         } else {
           throw new AuthenticationError('Action not allowed');
@@ -59,7 +67,7 @@ module.exports = {
     async likePost(_, { postId }, context) {
       const { username } = checkAuth(context);
 
-      const post = await Post.findById(postId);
+      const post = await Post.findById(postId, errorCatch);
       if (post) {
         if (post.likes.find((like) => like.username === username)) {
           //Post already likes, unlike it
@@ -71,7 +79,7 @@ module.exports = {
             createdAt: new Date().toISOString(),
           });
         }
-        await post.save();
+        await post.save(errorCatch);
         return post;
       } else throw new UserInputError('Post not found');
     },

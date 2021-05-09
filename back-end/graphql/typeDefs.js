@@ -102,7 +102,7 @@ module.exports = gql`
     comments: [Comment]!
     likes: [Like]!
     # likeCount: Int!
-    # commentCount: Int!
+    commentCount: Int!
   }
   type Comment {
     id: ID!
@@ -131,8 +131,8 @@ module.exports = gql`
   type Query {
     getPosts: [Post]
     getPost(postId: ID!): Post
-    getSportsmen: [Sportsmen]
-    getSportswomen: [Sportswomen]
+    getSportsmen: [Sportsman]
+    getSportswomen: [Sportswoman]
     getSportsman(IBUId: String!): Sportsman
     getSportswoman(IBUId: String!): Sportswoman
     getCompetitions: [Competition]
