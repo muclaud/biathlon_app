@@ -5,7 +5,7 @@ const postSchema = new Schema({
   username: String,
   createdAt: String,
   // likeCount: Number,
-  // commentCount: Number,
+  commentCount: Number,
   comments: [
     {
       body: String,
