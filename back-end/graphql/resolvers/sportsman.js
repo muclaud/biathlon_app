@@ -1,4 +1,4 @@
-const { UserInputError } = require('apollo-server-errors');
+const { UserInputError } = require('apollo-server');
 const Sportsman = require('../../models/Sportsman');
 const checkAuth = require('../../util/check-auth');
 
